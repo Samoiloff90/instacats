@@ -3,6 +3,7 @@ package com.instacats.demo.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.instacats.demo.entity.enums.ERole;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -39,6 +40,13 @@ public class User {
     @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
     @Column(updatable = false)
     private LocalDateTime createDate;
+
+    @Transient
+    private Collections<? extends GrantedAuthority> authorities;
+
+    public User() {
+
+    }
 
     @PrePersist
     protected  void onCreate() {
