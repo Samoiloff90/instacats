@@ -42,7 +42,7 @@ public class User {
     private LocalDateTime createDate;
 
     @Transient
-    private Collections<? extends GrantedAuthority> authorities;
+    private Collection<? extends GrantedAuthority> authorities;
 
     public User() {
 
