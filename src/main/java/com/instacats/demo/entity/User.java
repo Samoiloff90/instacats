@@ -31,8 +31,8 @@ public class User {
 
     @ElementCollection(targetClass = ERole.class)
     @CollectionTable(name = "user_role",
-    joinColumns = @JoinColumn("user_id"))
-    private Set<ERole> role = new HashSet<>();
+            joinColumns = @JoinColumn(name = "user_id"))
+    private Set<ERole> roles = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
