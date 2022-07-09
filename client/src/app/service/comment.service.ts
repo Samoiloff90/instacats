@@ -1,32 +1,29 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
-const POST_API = 'http://localhost:8080/api/post/';
+const COMMENT_API = 'http://localhost:8082/api/comment/';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostService {
+export class CommentService {
 
   constructor(private http: HttpClient) {
   }
 
-  createPost(post: Post): Observable<any> {
-    return this.http.post(POST_API + 'create', post);
+  addToCommentToPost(postId: number, message: string): Observable<any> {
+    return this.http.post(COMMENT_API + postId + '/create', {
+      message: message
+    });
   }
 
-  getAllPosts(): Observable<any> {
-    return this.http.get(POST_API + 'all');
+  getCommentsToPost(postId: number): Observable<any> {
+    return this.http.get(COMMENT_API + postId + '/all');
   }
 
-  getPostForCurrentUser(): Observable<any> {
-    return this.http.get(POST_API + 'user/posts');
+  deleteComment(commentId: number): Observable<any> {
+    return this.http.post(COMMENT_API + commentId + '/delete', null);
   }
 
-  deletePost(id: number): Observable<any> {
-    return this.http.post(POST_API + id + '/delete', null);
-  }
-
-  likePost(id: number, username: string): Observable<any> {
-    return this.http.post(POST_API + id + '/' + username + '/like', null);
-  }
 }

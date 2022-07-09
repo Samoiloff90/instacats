@@ -1,16 +1,17 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Post } from '../models/Post';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Post} from '../models/Post';
+import {Observable} from 'rxjs';
 
-const POST_API = 'http://localhost:8082/api/post';
+const POST_API = 'http://localhost:8082/api/post/';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   createPost(post: Post): Observable<any> {
     return this.http.post(POST_API + 'create', post);
@@ -24,7 +25,7 @@ export class PostService {
     return this.http.get(POST_API + 'user/posts');
   }
 
-  delete(id: number): Observable<any> {
+  deletePost(id: number): Observable<any> {
     return this.http.post(POST_API + id + '/delete', null);
   }
 
